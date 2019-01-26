@@ -1,8 +1,8 @@
 class HSMTooltip extends HTMLElement {
   constructor() {
     super();
-    this._tooltipContainer;
     this._tooltipIcon;
+    this._tooltipVisibility = false;
     this._tooltipText = 'Welcome!';
     this.attachShadow({ mode: 'open' });
     this.shadowRoot.innerHTML = `
@@ -41,6 +41,7 @@ class HSMTooltip extends HTMLElement {
     this._tooltipIcon = this.shadowRoot.querySelector('span.icon');
     this._tooltipIcon.addEventListener('mouseenter', this._showTooltip.bind(this));
     this._tooltipIcon.addEventListener('mouseleave', this._hideTooltip.bind(this));
+    this._render();
   }
 
   disconnectedCallback() {
@@ -58,13 +59,26 @@ class HSMTooltip extends HTMLElement {
   }
 
   _showTooltip() {
-    this._tooltipContainer = document.createElement('div');
-    this._tooltipContainer.textContent = this._tooltipText;
-    this.shadowRoot.appendChild(this._tooltipContainer);
+    this._tooltipVisibility = true;
+    this._render();
   }
 
   _hideTooltip() {
-    this.shadowRoot.removeChild(this._tooltipContainer);
+    this._tooltipVisibility = false;
+    this._render();
+  }
+
+  _render() {
+    let tooltipContainer = this.shadowRoot.querySelector('div');
+    if (this._tooltipVisibility) {
+      tooltipContainer = document.createElement('div');
+      tooltipContainer.textContent = this._tooltipText;
+      this.shadowRoot.appendChild(tooltipContainer);
+    } else {
+      if (tooltipContainer) {
+        this.shadowRoot.removeChild(tooltipContainer);
+      }
+    }
   }
 }
 
