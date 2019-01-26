@@ -6,25 +6,29 @@ class HSMTooltip extends HTMLElement {
     this.attachShadow({ mode: 'open' });
     this.shadowRoot.innerHTML = `
       <style>
-        span.highlight {
-          position: relative;
-          font-weight: bold;
-        }
-        ::slotted(span.highlight) {
-          font-weight: bold;
-        }
         div {
           background-color: #2ecc71;
           color: #fefefe;
-          padding: .25rem;
-          border-radius: .25rem;
+          padding: .5rem;
+          border-radius: .5rem;
           margin-top: .5rem;
           position: absolute;
           z-index: 10;
         }
+        span.highlight {
+          background-color: #0a0a0a;
+          color: #fefefe;
+          padding: 0.15rem 0.5rem;
+          text-align: center;
+          border-radius: 50%;
+          cursor: help;
+        }
+        ::slotted(span.highlight) {
+          font-weight: bold;
+        }
       </style>
       <slot>Components</slot>
-      <span class="highlight"> (?)</span>
+      <span class="highlight">?</span>
     `;
   }
 
