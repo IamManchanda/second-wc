@@ -1,4 +1,4 @@
-class Tooltip extends HTMLElement {
+class HSMTooltip extends HTMLElement {
   constructor() {
     super();
     this._tooltipContainer;
@@ -14,7 +14,7 @@ class Tooltip extends HTMLElement {
           color: #fefefe;
           padding: .25rem;
           border-radius: .25rem;
-          margin-top: .25rem;
+          margin-top: .5rem;
           position: absolute;
           z-index: 10;
         }
@@ -45,4 +45,4 @@ class Tooltip extends HTMLElement {
   }
 }
 
-customElements.define('hsm-tooltip', Tooltip);
+customElements.define('hsm-tooltip', HSMTooltip);
