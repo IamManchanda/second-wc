@@ -2,6 +2,7 @@ class HSMTooltip extends HTMLElement {
   constructor() {
     super();
     this._tooltipContainer;
+    this._tooltipIcon;
     this._tooltipText = 'Welcome!';
     this.attachShadow({ mode: 'open' });
     this.shadowRoot.innerHTML = `
@@ -37,9 +38,14 @@ class HSMTooltip extends HTMLElement {
 
   connectedCallback() {
     if (this.hasAttribute('hsm-text')) this._tooltipText = this.getAttribute('hsm-text');
-    const tooltipIcon = this.shadowRoot.querySelector('span.icon');
-    tooltipIcon.addEventListener('mouseenter', this._showTooltip.bind(this));
-    tooltipIcon.addEventListener('mouseleave', this._hideTooltip.bind(this));
+    this._tooltipIcon = this.shadowRoot.querySelector('span.icon');
+    this._tooltipIcon.addEventListener('mouseenter', this._showTooltip.bind(this));
+    this._tooltipIcon.addEventListener('mouseleave', this._hideTooltip.bind(this));
+  }
+
+  disconnectedCallback() {
+    this._tooltipIcon.removeEventListener('mouseenter', this._showTooltip);
+    this._tooltipIcon.removeEventListener('mouseleave', this._hideTooltip);
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
