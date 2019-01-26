@@ -6,8 +6,12 @@ class HSMTooltip extends HTMLElement {
     this.attachShadow({ mode: 'open' });
     this.shadowRoot.innerHTML = `
       <style>
-        span {
+        span.highlight {
           position: relative;
+          font-weight: bold;
+        }
+        ::slotted(span.highlight) {
+          font-weight: bold;
         }
         div {
           background-color: #2ecc71;
@@ -20,7 +24,7 @@ class HSMTooltip extends HTMLElement {
         }
       </style>
       <slot>Components</slot>
-      <span> (?)</span>
+      <span class="highlight"> (?)</span>
     `;
   }
 
