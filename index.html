@@ -8,9 +8,13 @@
   <script src="js/hsm-tooltip.js"></script>
 </head>
 <body>
+    <template id="tooltip-template">
+      <slot>Components</slot>
+      <span> (?)</span>
+    </template>
   <p>
       <hsm-tooltip 
-        hsm-text="Web Components are set of Standards">
+        hsm-text="Web Components are a set of Standards">
         Web Components
       </hsm-tooltip> are Awesome!
   </p>
